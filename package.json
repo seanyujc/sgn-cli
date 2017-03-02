@@ -1,0 +1,24 @@
+{
+  "name": "sgn-cli",
+  "version": "1.0.0",
+  "description": "this's command line tools",
+  "main": "index.js",
+  "bin": {
+    "sgn": "bundles/sgn.js",
+    "sgn-init": "bundles/sgn-init.js",
+    "sgn-build": "bundles/sgn-build.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sean",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/commander": "^2.3.31",
+    "@types/node": "^7.0.5"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "download-git-repo": "^0.2.1"
+  }
+}
