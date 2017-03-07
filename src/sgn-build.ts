@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import Promise = require('bluebird')
+// import Promise = require('bluebird')
 import fs = require('fs')
 import path = require('path')
 import program = require('commander')
 import template = require('lodash.template')
 
-const readdir = Promise.promisify(fs.readdir)
-const readFile = Promise.promisify(fs.readFile)
+// const readdir = Promise.promisify(fs.readdir)
+// const readFile = Promise.promisify(fs.readFile)
 
 program
     .usage('[entry]')
@@ -17,32 +17,47 @@ console.log(process.env.PWD);
 
 const resourceRoot = path.join(process.env.PWD, '.sgn')
 const tplRoot = path.join(resourceRoot, '_tpl')
+// page module
 if (typeof program.page === 'string') {
     const _moduleTplRoot = path.join(tplRoot, 'pages');
 
     if (fs.existsSync(_moduleTplRoot)) {
-        readdir(_moduleTplRoot).then((files) => {
+        fs.readdir(_moduleTplRoot, (err, files)=>{
+            if(err){
+                console.log(err);
+                return
+            }
             files.forEach((value, index, array) => {
                 let _extname = getExtname(value)
                 let _pathname = path.join(_moduleTplRoot, value)
                 fs.readFile(_pathname, (err, data) => {
                     let content = replaceKeyword(data.toString('utf8'), program.page)
-                    let file = path.join(program.page, program.page + _extname)
-                    writeFile('pages/'+program.page, file, content);
+                    let dir = path.join('pages', program.page)
+                    writeFile(dir, program.page + _extname, content);
                 })
             })
-        }).catch((err) => {
-            console.log(err)
         })
     } else {
         console.log('".sgn" directory isn\'t exists, it\'s root of resource files.')
     }
-
 }
 
 function getExtname(filename: string) {
     const i = filename.indexOf('.')
     return (i < 0) ? "" : filename.substr(i).replace('.tpl', '')
+}
+
+// function mkdirs(dirpath: string, callback:any):void;
+// function mkdirs(dirpath: string, mode:number, callback:any): void;
+function mkdirs(dirpath, mode=0o777, callback?) {
+    if(fs.existsSync(dirpath)){
+        callback(dirpath)
+    }else{
+        mkdirs(path.dirname(dirpath), mode, function(){
+            fs.mkdirSync(dirpath, mode )
+            callback()
+        })
+    }
 }
 
 function replaceKeyword(tpl: string, moduleName: string) {
@@ -51,15 +66,22 @@ function replaceKeyword(tpl: string, moduleName: string) {
 }
 
 function writeFile(dir: string, file: string, data) {
-    const srcRoot = path.join(process.env.PWD, '_src/app' , dir)
-    if (!fs.existsSync(srcRoot)) {
-        fs.mkdirSync(srcRoot)
-    }
+    const srcRoot = path.join(process.env.PWD, '_src/app', dir)
     const filePath = path.join(srcRoot, file)
-    if (fs.existsSync(filePath)) {
+
+    if(fs.existsSync(srcRoot) && fs.existsSync(filePath)){
         return;
     }
-    fs.writeFile(filePath, data, { flag: 'a' })
+
+    if (!fs.existsSync(srcRoot)) {
+        mkdirs(srcRoot, 0o777, function(){
+            fs.writeFile(filePath, data, { flag: 'a' })
+            console.log(`created file: ${filePath}`)
+        });
+    }else{
+        fs.writeFile(filePath, data, { flag: 'a' })
+        console.log(`Created file: ${filePath}`)
+    }
 }
 
 console.log(`Creating ${program.page} module...`);

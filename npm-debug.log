@@ -1,9 +1,8 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/home/jcyu/n/bin/node',
-1 verbose cli   '/home/jcyu/n/bin/npm',
+1 verbose cli [ '/usr/local/n/bin/node',
+1 verbose cli   '/usr/local/n/bin/npm',
 1 verbose cli   'run-script',
-1 verbose cli   'debug',
-1 verbose cli   '--page=home' ]
+1 verbose cli   'debug' ]
 2 info using npm@3.10.10
 3 info using node@v6.9.5
 4 verbose run-script [ 'predebug', 'debug', 'postdebug' ]
@@ -11,26 +10,26 @@
 6 silly lifecycle sgn-cli@1.0.0~predebug: no script for predebug, continuing
 7 info lifecycle sgn-cli@1.0.0~debug: sgn-cli@1.0.0
 8 verbose lifecycle sgn-cli@1.0.0~debug: unsafe-perm in lifecycle true
-9 verbose lifecycle sgn-cli@1.0.0~debug: PATH: /home/jcyu/n/lib/node_modules/npm/bin/node-gyp-bin:/home/jcyu/Projects/experiment/sgn-cli/node_modules/.bin:/home/jcyu/bin:/home/jcyu/.local/bin:/home/jcyu/n/bin:/usr/java/jdk1.8.0_121/bin:/usr/java/jdk1.8.0_121/jre/bin:/home/jcyu/bin:/home/jcyu/.local/bin:/home/jcyu/n/bin:/usr/java/jdk1.8.0_121/bin:/usr/java/jdk1.8.0_121/jre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
-10 verbose lifecycle sgn-cli@1.0.0~debug: CWD: /home/jcyu/Projects/experiment/sgn-cli
+9 verbose lifecycle sgn-cli@1.0.0~debug: PATH: /usr/local/n/lib/node_modules/npm/bin/node-gyp-bin:/Users/sean/Projects/experiment/sgn-cli/node_modules/.bin:/Users/sean/.rvm/gems/ruby-2.2.2/bin:/Users/sean/.rvm/gems/ruby-2.2.2@global/bin:/Users/sean/.rvm/rubies/ruby-2.2.2/bin:/usr/local/maven/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/sean/Projects/go/bin:/Users/sean/.rvm/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre/bin:/Users/sean/Projects/go/bin:/Users/sean/.rvm/bin:/usr/local/maven/bin:/usr/local/n/bin
+10 verbose lifecycle sgn-cli@1.0.0~debug: CWD: /Users/sean/Projects/experiment/sgn-cli
 11 silly lifecycle sgn-cli@1.0.0~debug: Args: [ '-c',
 11 silly lifecycle   'node --nolazy --debug-brk=5858 ./bundles/sgn-build.js --page=home' ]
 12 silly lifecycle sgn-cli@1.0.0~debug: Returned: code: 1  signal: null
 13 info lifecycle sgn-cli@1.0.0~debug: Failed to exec debug script
 14 verbose stack Error: sgn-cli@1.0.0 debug: `node --nolazy --debug-brk=5858 ./bundles/sgn-build.js --page=home`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/home/jcyu/n/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/n/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at EventEmitter.emit (events.js:191:7)
-14 verbose stack     at ChildProcess.<anonymous> (/home/jcyu/n/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/local/n/lib/node_modules/npm/lib/utils/spawn.js:40:14)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at ChildProcess.emit (events.js:191:7)
 14 verbose stack     at maybeClose (internal/child_process.js:877:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid sgn-cli@1.0.0
-16 verbose cwd /home/jcyu/Projects/experiment/sgn-cli
-17 error Linux 4.8.0-39-generic
-18 error argv "/home/jcyu/n/bin/node" "/home/jcyu/n/bin/npm" "run-script" "debug" "--page=home"
+16 verbose cwd /Users/sean/Projects/experiment/sgn-cli
+17 error Darwin 16.4.0
+18 error argv "/usr/local/n/bin/node" "/usr/local/n/bin/npm" "run-script" "debug"
 19 error node v6.9.5
 20 error npm  v3.10.10
 21 error code ELIFECYCLE
