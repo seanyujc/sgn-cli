@@ -14,6 +14,6 @@ program
 
 if (typeof program.page === 'string') {
     console.log(`Removing ${program.page} module...`);
-    // pages.removeFile(tplRoot, program.page)
+    pages.removeFile(program.page)
     pages.removeConfig(program.page);
 }

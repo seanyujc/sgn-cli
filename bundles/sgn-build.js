@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var path = require("path");
 var program = require("commander");
 var pages = require("./lib/pages");
 // const readdir = Promise.promisify(fs.readdir)
@@ -12,12 +11,10 @@ program
     .option('--route-path [route-path]', "The path of config file")
     .parse(process.argv);
 // console.log(process.env.PWD);
-var resourceRoot = path.join(process.env.PWD, '.sgn');
-var tplRoot = path.join(resourceRoot, '_tpl');
 // page module
 if (typeof program.page === 'string') {
     console.log("Creating " + program.page + " module...");
-    // pages.createFile(tplRoot, program.page)
+    pages.createFile(program.page);
     pages.writeConfig(program.page);
 }
 //# sourceMappingURL=sgn-build.js.map

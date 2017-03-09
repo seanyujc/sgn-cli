@@ -35,16 +35,16 @@ export function replaceKeyword(tplContent: string, moduleName: string) {
 }
 
 
-export function writeFile(dir: string, file: string, data) {
-    const srcRoot = path.join(process.env.PWD, 'src/app', dir)
-    const filePath = path.join(srcRoot, file)
+export function writeFile(basePath: string, file: string, data) {
+    // const srcRoot = path.join(process.env.PWD,  dir)
+    const filePath = path.join(basePath, file)
 
-    if(fs.existsSync(srcRoot) && fs.existsSync(filePath)){
+    if(fs.existsSync(basePath) && fs.existsSync(filePath)){
         return;
     }
 
-    if (!fs.existsSync(srcRoot)) {
-        mkdirs(srcRoot, 0o777, function(){
+    if (!fs.existsSync(basePath)) {
+        mkdirs(basePath, 0o777, function(){
             fs.writeFile(filePath, data, { flag: 'a' })
             console.log(`created file: ${filePath}`)
         });

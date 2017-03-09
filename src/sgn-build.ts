@@ -17,12 +17,10 @@ program
 
 // console.log(process.env.PWD);
 
-const resourceRoot = path.join(process.env.PWD, '.sgn')
-const tplRoot = path.join(resourceRoot, '_tpl')
 // page module
 if (typeof program.page === 'string') {
     console.log(`Creating ${program.page} module...`);
-    // pages.createFile(tplRoot, program.page)
+    pages.createFile( program.page)
     pages.writeConfig(program.page);
 }
 
