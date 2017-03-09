@@ -4,5 +4,6 @@ require('commander')
     .usage('<command> [options]')
     .command('init', 'generate a new project from a template')
     .command('build', 'build module')
+    .command('remove', 'remove module')
     .parse(process.argv);
 //# sourceMappingURL=sgn.js.map

@@ -6,10 +6,11 @@
   "bin": {
     "sgn": "bundles/sgn.js",
     "sgn-init": "bundles/sgn-init.js",
-    "sgn-build": "bundles/sgn-build.js"
+    "sgn-build": "bundles/sgn-build.js",
+    "sgn-remove": "bundles/sgn-remove.js"
   },
   "scripts": {
-    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-build.js --page=home",
+    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-remove.js --page=home",
     "test": "sgn build --page home"
   },
   "author": "sean",
