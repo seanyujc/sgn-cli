@@ -93,6 +93,10 @@ export function writeConfig(pageName: string) {
             // '${pageName}' CONFIG 2 END`
 
     fs.readFile(ROUTE_CONF_PATH, (err, data) => {
+        if (err) {
+            console.error(err);
+            return
+        }
         let fileContent = data.toString();
         let reg = new RegExp(ROUTE_CONF_ANCHOR);
         let start = fileContent.search(reg);
@@ -108,6 +112,10 @@ export function writeConfig(pageName: string) {
         })
     })
     fs.readFile(ROUTE_PROVIDER_PATH, (err, data) => {
+        if (err) {
+            console.error(err);
+            return
+        }
         let fileContent = data.toString();
         let reg0 = new RegExp(ROUTE_PROVIDER_0_ANCHOR);
         let reg1 = new RegExp(ROUTE_PROVIDER_1_ANCHOR);

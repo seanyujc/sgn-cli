@@ -2,6 +2,17 @@ import fs = require('fs')
 import path = require('path')
 import template = require('lodash.template')
 
+
+export function lowerFirst(str: string){
+    let first = str.substr(0,1).toLocaleLowerCase()
+    let surplus= str.substr(1,str.length);
+    return first+ surplus;
+}
+export function upperFirst(str: string){
+    let first = str.substr(0,1).toLocaleUpperCase()
+    let surplus= str.substr(1,str.length);
+    return first+ surplus;
+}
 /**
  * 
  * @param dirpath 

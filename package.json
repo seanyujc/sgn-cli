@@ -10,7 +10,7 @@
     "sgn-remove": "bundles/sgn-remove.js"
   },
   "scripts": {
-    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-remove.js --page=home",
+    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-build.js --service=user --fun=getUserInfo",
     "test": "sgn build --page home"
   },
   "author": "sean",
