@@ -14,7 +14,7 @@ const MODULE_TPL_ROOT = path.join(config.TPL_ROOT, 'pages');
 
 export function createFile(pageName: string) {
     if (!fs.existsSync(MODULE_TPL_ROOT)) {
-        console.error('".sgn" directory isn\'t exists, it\'s root of resource files.');
+        console.error(`directory isn\'t exists: ${MODULE_TPL_ROOT}`);
         return;
     }
 
@@ -150,7 +150,7 @@ export function removeConfig(pageName: string) {
 
     fs.readFile(ROUTE_CONF_PATH, (err, data) => {
         let fileContent = data.toString();
-        const pattern = `[\\s]{0,4}// '${pageName}' CONFIG START[\\s\\S]* // '${pageName}' CONFIG END[\\n]`;
+        const pattern = `^[ ]*// '${pageName}' CONFIG START[\\s\\S]* // '${pageName}' CONFIG END[\\n]`;
         let reg = new RegExp(pattern);
         let start = fileContent.search(reg);
         if (start === -1) {
@@ -165,9 +165,9 @@ export function removeConfig(pageName: string) {
     })
     fs.readFile(ROUTE_PROVIDER_PATH, (err, data) => {
         let fileContent = data.toString();
-        const pattern0 = `[ ]{0,4}// '${pageName}' CONFIG 0 START[\\s\\S]* // '${pageName}' CONFIG 0 END[\\n]`;
-        const pattern1 = `[ ]{0,8}// '${pageName}' CONFIG 1 START[\\s\\S]* // '${pageName}' CONFIG 1 END[\\n]`;
-        const pattern2 = `[ ]{0,12}// '${pageName}' CONFIG 2 START[\\s\\S]* // '${pageName}' CONFIG 2 END[\\n]`;
+        const pattern0 = `^[ ]*// '${pageName}' CONFIG 0 START[\\s\\S]* // '${pageName}' CONFIG 0 END[\\n]`;
+        const pattern1 = `^[ ]*// '${pageName}' CONFIG 1 START[\\s\\S]* // '${pageName}' CONFIG 1 END[\\n]`;
+        const pattern2 = `^[ ]*// '${pageName}' CONFIG 2 START[\\s\\S]* // '${pageName}' CONFIG 2 END[\\n]`;
         let reg0 = new RegExp(pattern0);
         let reg1 = new RegExp(pattern1);
         let reg2 = new RegExp(pattern2);

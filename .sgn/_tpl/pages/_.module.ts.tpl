@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import "./<%= moduleName%>.scss"
+require("!!style-loader!css-loader!sass-loader!./<%= moduleName%>.scss");
 import <%= moduleName%>Controller from './<%= moduleName%>.controller';
 
 const <%= moduleName%>Module = angular.module("<%= moduleName%>-module", []);

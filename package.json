@@ -10,6 +10,7 @@
     "sgn-remove": "bundles/sgn-remove.js"
   },
   "scripts": {
+    "rebuild": "rimraf bundles && tsc && npm unlink && npm link",
     "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-build.js --service=user --fun=getUserInfo",
     "test": "sgn build --page home"
   },

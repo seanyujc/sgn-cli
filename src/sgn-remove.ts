@@ -8,8 +8,7 @@ import * as pages from './lib/pages';
 
 program
     .usage('[entry]')
-    .option('--page [page-name]', 'create page module')
-    .option('--route-path [route-path]', "The path of config file")
+    .option('-p,--page [page-name]', 'create page module')
     .parse(process.argv);
 
 if (typeof program.page === 'string') {

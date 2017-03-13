@@ -13,6 +13,7 @@ program
     .option('-f,--fun [method-name]', "method name")
     .parse(process.argv);
 // console.log(process.env.PWD);
+console.log(__dirname);
 // page module
 if (typeof program.page === 'string') {
     console.log("Creating " + program.page + " module...");
