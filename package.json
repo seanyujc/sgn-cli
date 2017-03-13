@@ -1,6 +1,6 @@
 {
   "name": "sgn-cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "this's command line tools",
   "main": "index.js",
   "bin": {
