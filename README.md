@@ -12,5 +12,5 @@ CLI for sng project
   
   sgn build -s <service-name>
   
-  sgn build -s <service-name -f <fun-name>
+  sgn build -s <service-name> -f <fun-name>
   
