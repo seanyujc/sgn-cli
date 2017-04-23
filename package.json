@@ -1,6 +1,6 @@
 {
   "name": "sgn-cli",
-  "version": "1.0.4",
+  "version": "1.1.1",
   "description": "this's command line tools",
   "main": "index.js",
   "bin": {
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "rebuild": "rimraf bundles && tsc && npm unlink && npm link",
-    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-remove.js --page=test",
+    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-build.js --page=test",
     "test": "sgn build --page home"
   },
   "author": "sean",

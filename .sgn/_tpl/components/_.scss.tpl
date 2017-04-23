@@ -1,0 +1,2 @@
+.comp-box.<%= moduleName%>-box{
+}
