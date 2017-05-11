@@ -19,7 +19,7 @@ program
   .option('-f,--fun [method-name]', "method name")
   .parse(process.argv);
 
-// console.log(process.env.PWD);
+// console.log(commons.currentPath());
 console.log(__dirname);
 
 // page module

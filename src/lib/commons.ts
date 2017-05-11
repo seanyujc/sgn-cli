@@ -1,7 +1,15 @@
+const os = require('os');
 import fs = require('fs')
 import path = require('path')
 import template = require('lodash.template')
 
+export function endl(){
+  return os.EOL;
+}
+
+export function currentPath (){
+  return process.env.PWD || process.cwd();
+}
 
 export function lowerFirst(str: string) {
   let first = str.substr(0, 1).toLocaleLowerCase()
@@ -47,7 +55,7 @@ export function replaceKeyword(tplContent: string, moduleName: string) {
 }
 
 export function writeFile(basePath: string, file: string, data) {
-  // const srcRoot = path.join(process.env.PWD,  dir)
+  // const srcRoot = path.join(commons.currentPath(),  dir)
   const filePath = path.join(basePath, file)
 
   if (fs.existsSync(basePath) && fs.existsSync(filePath)) {

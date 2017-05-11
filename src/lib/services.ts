@@ -6,7 +6,7 @@ import * as config from './config';
 
 const SERVICE_INT_ANTHOR = '// XBP-NM-SI-NO-DELETE'
 const SERVICE_FUN_ANTHOR = '// XBP-NM-SF-NO-DELETE'
-const basePath = path.join(process.env.PWD, 'src/app/core/services')
+const basePath = path.join(commons.currentPath(), 'src/app/core/services')
 const _extname = '.service.ts'
 
 export function createFile(serviceName: string) {
@@ -51,8 +51,8 @@ export function writeConfig(serviceName: string) {
       console.error('write service config fail! anchor not find.');
       return;
     }
-    const repCon0 = config.CORE_IM_ATHOR + '\n' + SERVICE_IMPORT_TPL;
-    const repCon1 = config.CORE_CONFIG_ATHOR + '\n' + SERVICE_CONFIG_TPL;
+    const repCon0 = config.CORE_IM_ATHOR + commons.endl() + SERVICE_IMPORT_TPL;
+    const repCon1 = config.CORE_CONFIG_ATHOR + commons.endl() + SERVICE_CONFIG_TPL;
     fileContent = fileContent.replace(reg0, repCon0);
     fileContent = fileContent.replace(reg1, repCon1);
     fs.writeFile(config.CORE_CONFIG_PATH, fileContent, (err) => {
@@ -83,8 +83,8 @@ export function addFunction(serviceName: string, funName: string) {
       console.error('write method in service is fail! anchor not find.');
       return;
     }
-    const repCon0 = SERVICE_INT_ANTHOR + '\n' + SERVICE_INT_TPL;
-    const repCon1 = SERVICE_FUN_ANTHOR + '\n' + SERVICE_FUN_TPL;
+    const repCon0 = SERVICE_INT_ANTHOR + commons.endl() + SERVICE_INT_TPL;
+    const repCon1 = SERVICE_FUN_ANTHOR + commons.endl() + SERVICE_FUN_TPL;
     fileContent = fileContent.replace(reg0, repCon0);
     fileContent = fileContent.replace(reg1, repCon1);
     fs.writeFile(filePath, fileContent, (err) => {

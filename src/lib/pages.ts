@@ -4,8 +4,8 @@ import path = require('path')
 import * as commons from './commons';
 import * as config from './config';
 
-const ROUTE_CONF_PATH = path.join(process.env.PWD, "src/app/index.routes.ts");
-const ROUTE_PROVIDER_PATH = path.join(process.env.PWD, "src/app/core/providers/resolver.provider.ts");
+const ROUTE_CONF_PATH = path.join(commons.currentPath(), "src/app/index.routes.ts");
+const ROUTE_PROVIDER_PATH = path.join(commons.currentPath(), "src/app/core/providers/resolver.provider.ts");
 const ROUTE_CONF_ANCHOR = "// XBP-NM-ROUTE-NO-DELETE";
 const ROUTE_PROVIDER_0_ANCHOR = "// XBP-NM-PLI-NO-DELETE";
 const ROUTE_PROVIDER_1_ANCHOR = "// XBP-NM-PLF-NO-DELETE";
@@ -28,7 +28,7 @@ export function createFile(pageName: string) {
       let _pathName = path.join(MODULE_TPL_ROOT, fileName)
       fs.readFile(_pathName, (err, data) => {
         let content = commons.replaceKeyword(data.toString('utf8'), pageName)
-        let basePath = path.join(process.env.PWD, 'src/app/pages', pageName)
+        let basePath = path.join(commons.currentPath(), 'src/app/pages', pageName)
         commons.writeFile(basePath, pageName + _extname, content);
       })
     })
@@ -36,10 +36,14 @@ export function createFile(pageName: string) {
 }
 
 export function removeFile(pageName: string) {
+  if (!fs.existsSync(path.join(commons.currentPath(), 'src/app/pages', pageName))) {
+    return;
+  }
   if (!fs.existsSync(MODULE_TPL_ROOT)) {
     console.error('".sgn" directory isn\'t exists, it\'s root of resource files.');
     return;
   }
+  
   fs.readdir(MODULE_TPL_ROOT, (err, files) => {
     if (err) {
       console.error(err);
@@ -47,11 +51,11 @@ export function removeFile(pageName: string) {
     }
     files.forEach((fileName, index, array) => {
       let _extname = commons.getExtname(fileName)
-      let filePath = path.join(process.env.PWD, 'src/app/pages', pageName, pageName + _extname)
+      let filePath = path.join(commons.currentPath(), 'src/app/pages', pageName, pageName + _extname)
       fs.unlinkSync(filePath)
       console.log(`file "${filePath}" is removed`)
     })
-    fs.rmdir(path.join(process.env.PWD, 'src/app/pages', pageName));
+    fs.rmdir(path.join(commons.currentPath(), 'src/app/pages', pageName));
   })
 }
 
@@ -104,7 +108,7 @@ export function writeConfig(pageName: string) {
       console.error('writed fail! anchor not find.');
       return;
     }
-    const repCon = ROUTE_CONF_ANCHOR + '\n' + ROUTE_TPL;
+    const repCon = ROUTE_CONF_ANCHOR + commons.endl() + ROUTE_TPL;
     fileContent = fileContent.replace(reg, repCon);
     fs.writeFile(ROUTE_CONF_PATH, fileContent, (err) => {
       if (err) throw err;
@@ -127,9 +131,9 @@ export function writeConfig(pageName: string) {
       console.error('write route provider fail! anchor not find.');
       return;
     }
-    const repCon0 = ROUTE_PROVIDER_0_ANCHOR + '\n' + PROVIDER_0_TPL;
-    const repCon1 = ROUTE_PROVIDER_1_ANCHOR + '\n' + PROVIDER_1_TPL;
-    const repCon2 = ROUTE_PROVIDER_2_ANCHOR + '\n' + PROVIDER_2_TPL;
+    const repCon0 = ROUTE_PROVIDER_0_ANCHOR + commons.endl() + PROVIDER_0_TPL;
+    const repCon1 = ROUTE_PROVIDER_1_ANCHOR + commons.endl() + PROVIDER_1_TPL;
+    const repCon2 = ROUTE_PROVIDER_2_ANCHOR + commons.endl() + PROVIDER_2_TPL;
 
     fileContent = fileContent.replace(reg0, repCon0);
     fileContent = fileContent.replace(reg1, repCon1);
@@ -150,7 +154,7 @@ export function removeConfig(pageName: string) {
 
   fs.readFile(ROUTE_CONF_PATH, (err, data) => {
     let fileContent = data.toString();
-    const pattern = `[ |\\t]*// '${pageName}' CONFIG START[\\s\\S]*// '${pageName}' CONFIG END[\\n]`;
+    const pattern = `[ ]*// '${pageName}' CONFIG START[\\s\\S]*// '${pageName}' CONFIG END${commons.endl()}`;
     let reg = new RegExp(pattern);
     let start = fileContent.search(reg);
     if (start === -1) {
@@ -165,9 +169,9 @@ export function removeConfig(pageName: string) {
   })
   fs.readFile(ROUTE_PROVIDER_PATH, (err, data) => {
     let fileContent = data.toString();
-    const pattern0 = `[ |\\t]*// '${pageName}' CONFIG 0 START[\\s\\S]*// '${pageName}' CONFIG 0 END[\\n]`;
-    const pattern1 = `[ |\\t]*// '${pageName}' CONFIG 1 START[\\s\\S]*// '${pageName}' CONFIG 1 END[\\n]`;
-    const pattern2 = `[ |\\t]*// '${pageName}' CONFIG 2 START[\\s\\S]*// '${pageName}' CONFIG 2 END[\\n]`;
+    const pattern0 = `[ ]*// '${pageName}' CONFIG 0 START[\\s\\S]*// '${pageName}' CONFIG 0 END${commons.endl()}`;
+    const pattern1 = `[ ]*// '${pageName}' CONFIG 1 START[\\s\\S]*// '${pageName}' CONFIG 1 END${commons.endl()}`;
+    const pattern2 = `[ ]*// '${pageName}' CONFIG 2 START[\\s\\S]*// '${pageName}' CONFIG 2 END${commons.endl()}`;
     let reg0 = new RegExp(pattern0);
     let reg1 = new RegExp(pattern1);
     let reg2 = new RegExp(pattern2);
@@ -184,6 +188,7 @@ export function removeConfig(pageName: string) {
     fs.writeFile(ROUTE_PROVIDER_PATH, fileContent, (err) => {
       if (err) throw err;
       console.log(`removed ${pageName} page\'s route provider config!`);
+      return;
     })
   })
 }
