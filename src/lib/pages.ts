@@ -81,16 +81,16 @@ export function writeConfig(pageName: string) {
     // '${pageName}' CONFIG 0 END`
 
   const PROVIDER_1_TPL = `        // '${pageName}' CONFIG 1 START
-        const ${pageName}PagePreloading = function ($q: ng.IQService, $ocLazyLoad: ILazyLoad) {
-            var deferred = $q.defer();
-            require.ensure([], function (require) {
+        const ${pageName}PagePreloading = ($q: ng.IQService, $ocLazyLoad: ILazyLoad) => {
+            const deferred = $q.defer();
+            require.ensure([], (require) => {
                 var ${pageName}Module = require<{ default }>("../../pages/${pageName}/${pageName}.module").default;
                 $ocLazyLoad.load({ name: ${pageName}Module.name })
                 deferred.resolve(${pageName}Module.controller);
-            })
+            });
             return deferred.promise;
-        }
-        ${pageName}PagePreloading.$inject = ['$q', '$ocLazyLoad']
+        };
+        ${pageName}PagePreloading.$inject = ['$q', '$ocLazyLoad'];
         // '${pageName}' CONFIG 1 END`
   const PROVIDER_2_TPL = `            // '${pageName}' CONFIG 2 START
             ${pageName}PagePreloading,
