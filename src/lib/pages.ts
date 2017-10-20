@@ -68,6 +68,7 @@ export function writeConfig(pageName: string) {
   const ROUTE_TPL = `  // '${pageName}' CONFIG START
   $stateProvider.state("${pageName}", {
     url: "/${pageName}",
+    // tslint:disable-next-line:no-submodule-imports
     templateUrl: require("!!file-loader?name=templates/[name].[ext]!./pages/${pageName}/${pageName}.html"),
     controller: "${pageName}Controller",
     resolve: {

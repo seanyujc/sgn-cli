@@ -34,8 +34,8 @@ export class ${ufName}Service implements I${ufName} {
 export function writeConfig(serviceName: string) {
   const lFName = commons.lowerFirst(serviceName);
   const uFName = commons.upperFirst(serviceName);
-  const SERVICE_IMPORT_TPL = `import {${uFName}Service} from './services/${lFName}.service';`
-  const SERVICE_CONFIG_TPL = `shared.service('${lFName}', ${uFName}Service);`
+  const SERVICE_IMPORT_TPL = `import {${uFName}Service} from "./services/${lFName}.service";`
+  const SERVICE_CONFIG_TPL = `shared.service("${lFName}", ${uFName}Service);`
 
   fs.readFile(config.CORE_CONFIG_PATH, function (err, data) {
     if (err) {
@@ -66,7 +66,7 @@ export function addFunction(serviceName: string, funName: string) {
   let filePath = path.join(basePath, serviceName + _extname)
   const SERVICE_INT_TPL = `    ${funName}(parameter: string):ng.IPromise<any>;`
   const SERVICE_FUN_TPL = `    ${funName}(parameter: string):ng.IPromise<any>{
-        return this.proxyHttp.post('${funName}', {parameter});
+        return this.proxyHttp.post("${funName}", {parameter});
     }`
 
   fs.readFile(filePath, (err, data) => {

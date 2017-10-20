@@ -59,7 +59,7 @@ export function writeConfig(itemName: string) {
   }
 
   const CONFIG_1 = `// '${itemName}' CONFIG 1 START
-import ${itemName}Module from './components/${itemName}/${itemName}.module';
+import ${itemName}Module from "./components/${itemName}/${itemName}.module";
 // '${itemName}' CONFIG 1 END`;
   const CONFIG_2 = `  // '${itemName}' CONFIG 2 START
   ${itemName}Module.name,
