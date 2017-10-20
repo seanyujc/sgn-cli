@@ -65,36 +65,36 @@ export function writeConfig(pageName: string) {
     return;
   }
 
-  const ROUTE_TPL = `    // '${pageName}' CONFIG START
-    $stateProvider.state('${pageName}', {
-        url: "/${pageName}",
-        templateUrl: require('!!file-loader?name=templates/[name].[ext]!./pages/${pageName}/${pageName}.html'),
-        controller: "${pageName}Controller",
-        resolve: {
-            ${pageName}Preloading: resolverProvider.${pageName}PagePreloading
-        }
-    });
-    // '${pageName}' CONFIG END`
+  const ROUTE_TPL = `  // '${pageName}' CONFIG START
+  $stateProvider.state("${pageName}", {
+    url: "/${pageName}",
+    templateUrl: require("!!file-loader?name=templates/[name].[ext]!./pages/${pageName}/${pageName}.html"),
+    controller: "${pageName}Controller",
+    resolve: {
+      ${pageName}Preloading: resolverProvider.${pageName}PagePreloading,
+    },
+  });
+  // '${pageName}' CONFIG END`
 
-  const PROVIDER_0_TPL = `    // '${pageName}' CONFIG 0 START
-    ${pageName}PagePreloading: Function,
-    // '${pageName}' CONFIG 0 END`
+  const PROVIDER_0_TPL = `  // '${pageName}' CONFIG 0 START
+  ${pageName}PagePreloading: Function,
+  // '${pageName}' CONFIG 0 END`
 
   const PROVIDER_1_TPL = `        // '${pageName}' CONFIG 1 START
-        const ${pageName}PagePreloading = ($q: ng.IQService, $ocLazyLoad: ILazyLoad) => {
-            const deferred = $q.defer();
-            require.ensure([], (require) => {
-                var ${pageName}Module = require<{ default }>("../../pages/${pageName}/${pageName}.module").default;
-                $ocLazyLoad.load({ name: ${pageName}Module.name })
-                deferred.resolve(${pageName}Module.controller);
-            });
-            return deferred.promise;
-        };
-        ${pageName}PagePreloading.$inject = ['$q', '$ocLazyLoad'];
-        // '${pageName}' CONFIG 1 END`
-  const PROVIDER_2_TPL = `            // '${pageName}' CONFIG 2 START
-            ${pageName}PagePreloading,
-            // '${pageName}' CONFIG 2 END`
+    ${pageName}PagePreloading.$inject = ["$q", "$ocLazyLoad"];
+    function ${pageName}PagePreloading($q: ng.IQService, $ocLazyLoad: ILazyLoad) {
+        const deferred = $q.defer();
+        require.ensure([], (require) => {
+          const ${pageName}Module = require<{ default }>("../../pages/${pageName}/${pageName}.module").default;
+          $ocLazyLoad.load({ name: ${pageName}Module.name });
+          deferred.resolve(${pageName}Module.controller);
+        });
+        return deferred.promise;
+    }
+    // '${pageName}' CONFIG 1 END`
+  const PROVIDER_2_TPL = `      // '${pageName}' CONFIG 2 START
+      ${pageName}PagePreloading,
+      // '${pageName}' CONFIG 2 END`
 
   fs.readFile(ROUTE_CONF_PATH, (err, data) => {
     if (err) {

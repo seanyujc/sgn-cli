@@ -66,7 +66,7 @@ export function addFunction(serviceName: string, funName: string) {
   let filePath = path.join(basePath, serviceName + _extname)
   const SERVICE_INT_TPL = `    ${funName}(parameter: string):ng.IPromise<any>;`
   const SERVICE_FUN_TPL = `    ${funName}(parameter: string):ng.IPromise<any>{
-        return this.proxyHttp.get('${funName}', {parameter});
+        return this.proxyHttp.post('${funName}', {parameter});
     }`
 
   fs.readFile(filePath, (err, data) => {
