@@ -11,7 +11,7 @@
   },
   "scripts": {
     "rebuild": "rimraf bundles && tsc && npm unlink && npm link",
-    "debug": "node --nolazy --debug-brk=5858 ./bundles/sgn-remove.js --page=test",
+    "debug": "node --nolazy --debug-brk=9229 ./bundles/sgn-remove.js --page=test",
     "test": "sgn build --page home"
   },
   "author": "sean",
